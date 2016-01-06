@@ -234,3 +234,36 @@ i.scroll:hover {
   }
 
 }
+
+/* demo */
+#viewer, #lightbox, #slides {
+    margin: 5px;
+}
+
+section {
+    margin-bottom: 44px;
+}
+
+img[alt="rdn-json"] {
+    padding-right: 0;
+}
+
+img[alt="rdn-js_1"],
+img[alt="rdn-js_2"], {
+    padding-left: 0;
+    margin-bottom: 22px;
+}
+
+ul.demo li {
+  
+  margin-bottom: 12px;
+}
+
+li strong em {
+    font-weight: normal !important;
+    font-size: 0.8em;
+}
+
+#analysis {
+    margin-top: 22px;
+}

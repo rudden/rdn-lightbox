@@ -1,4 +1,6 @@
 $(document).ready(function () {
+
+	'use strict';
 	
 	(function ( $ ) {
 
@@ -408,8 +410,8 @@ $(document).ready(function () {
 
 				if ( settings.api[2].viewer ) {
 
-					var item = $('.img-active');
-					_alt = item.attr('alt');
+					var item = $('.img-active'),
+						_alt = item.attr('alt');
 
 					$('#v img[alt="' + _alt + '"]').addClass('view-active').show();
 
@@ -682,162 +684,6 @@ $(document).ready(function () {
 			}
 
 			var settings = $.extend({}, options, {});
-
-			/* FUNCTIONS FOR PRESENATION PAGE */
-
-			/**
-			 * ONLY FOR PRESENTATION PAGE - Ajax call to fetch properties
-			 * 
-			 * @param  {string} what which property to update
-			 * @param  {bool} 	how  set it to true or false
-			 * 
-			 * @return void
-			 */
-			var demo_ajaxCall = function ( what, how ) {
-				
-				$.ajax({
-			
-					url: 'settings.php',
-					dataType: 'json',
-
-					success: function ( data ) {
-
-						demo_updateSettings(what, how);
-
-						console.log('.ajax() request returned successfully.');
-					},
-
-					error: function ( jqXHR, textStatus, errorThrown ) {
-						console.log('.ajax() request failed: ' + textStatus + ', ' + errorThrown);
-					}
-
-				});
-
-			}
-
-			/**
-			 * ONLY FOR PRESENTATION PAGE - Update properties if ajax call was successfully
-			 * 
-			 * @param  {string} what which property to update
-			 * @param  {bool} 	how  set it to true or false
-			 * 
-			 * @return void
-			 */
-			var demo_updateSettings = function ( what, how ) {
-
-				switch ( what.toUpperCase() ) {
-
-					case 'VIEWER':
-						settings.api[2].viewer = how;
-
-						if ( settings.addon.slides ) {
-
-							settings.addon.slides = false;
-
-						}
-						break;
-
-					case 'SLIDES':
-						settings.addon.slides = how;
-						break;
-
-					case 'LIGHTBOX':
-						settings.addon.lightbox = how;
-						break;
-
-					default:
-						break;
-
-				}
-
-				$(this).generate(settings);
-
-			}
-
-			/**
-			 * ONLY FOR PRESENTATION PAGE - Generate markup (buttons) and call ajax on click
-			 * 
-			 * @param  {string} what which property to update
-			 * 
-			 * @return void
-			 */
-			var demo_Events = function ( what ) {
-
-				var name,
-					prop;
-
-				switch ( what.toUpperCase() ) {
-
-					case 'VIEWER':
-						name = 'viewer';
-						prop = settings.api[2].viewer;
-						break;
-
-					case 'LIGHTBOX':
-						name = 'lightbox';
-						prop = settings.addon.lightbox;
-						break;
-
-					case 'SLIDES':
-						name = 'slides';
-						prop = settings.addon.slides;
-						break;
-
-					default:
-						break;
-
-				}
-				
-				if ( prop ) {
-
-					$('<button id="' + name + '">' + name + ' </button> ').addClass('btn btn-danger btn-s demo').insertAfter('#btns');
-					$('<i>').addClass('fa fa-times').appendTo('#' + name);
-
-				}
-				else {
-
-					$('<button id="' + name + '">' + name + ' </button>').addClass('btn btn-success btn-s demo').insertAfter('#btns');
-					$('<i>').addClass('fa fa-plus').appendTo('#' + name);
-
-				}
-
-				if ( settings.api[2].viewer == false ) {
-
-					$('#slides').fadeOut();
-
-				}
-				else {
-
-					$('#slides').show();
-
-				}
-
-				$('#' + name).click(function () { 
-				
-					if ( prop ) {
-
-						$('button.demo').remove();
-
-						demo_ajaxCall(name, false);
-
-					}
-					else {
-
-						$('button.demo').remove();
-
-						demo_ajaxCall(name, true);
-
-					}
-
-				});
-
-			}
-
-			demo_Events('slides');
-			demo_Events('lightbox');
-			demo_Events('viewer');
-
-			/* /FUNCTIONS FOR PRESENATION PAGE */
 
 			if ( settings.addon.lightbox && settings.addon.slides && settings.api[2].viewer == false ) {
 
