@@ -1,0 +1,34 @@
+{
+    "rdn": 
+    [
+        {
+            "api": [
+                {
+                    "active": true
+                },
+                {
+                    "url": "http://api.flickr.com/services/feeds/",
+                    "feed": "photos_public.gne",
+                    "set": "jsoncallback=?",
+                    "user": null,
+                    "tags": "yosemite, nature",
+                    "mode": {
+                        "all": true,
+                        "any": false
+                    },
+                    "amount": 18,
+                    "appendTo": "#demo"
+                },
+                {
+                    "viewer": true,
+                    "size": "medium",
+                    "first": 4
+                }
+            ],
+            "addon": {
+                "lightbox": true,
+                "slides": false
+            }
+        }
+    ]
+}
